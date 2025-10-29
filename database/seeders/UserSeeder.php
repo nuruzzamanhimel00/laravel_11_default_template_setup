@@ -43,11 +43,10 @@ class UserSeeder extends Seeder
             'email_verified_at'     => now(),
             'password'              => \Illuminate\Support\Facades\Hash::make('12345678'),
             'status'                => User::STATUS_ACTIVE,
-            'type'                  => 'Admin',
+            'type'                  => 'Agent',
             'remember_token'        => Str::random(10),
         ]);
 
-        $agentUser->assignRole('Agent');
 
         // User::factory()->count(80)->create()->each(function ($user) {
         //     if($user->type == 'Admin') {

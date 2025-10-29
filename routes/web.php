@@ -1,36 +1,19 @@
 <?php
 
-use App\Models\User;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use App\Events\OrderNotifyEvent;
+
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CommonController;
-use App\Notifications\EmailVerifyNotifyMail;
+
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\BrandController;
-use App\Http\Controllers\Admin\OrderController;
-use App\Http\Controllers\Admin\ReportController;
+
 use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\Admin\StudentController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\PurchaseController;
-use App\Http\Controllers\Admin\SupplierController;
-use App\Http\Controllers\Admin\WishListController;
-use App\Http\Controllers\Admin\AttributeController;
+
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\PromotionController;
-use App\Http\Controllers\Admin\RestaurantController;
-use App\Http\Controllers\Admin\DeliveryManController;
-use App\Http\Controllers\Admin\NotificationController;
-use App\Http\Controllers\Auth\RegisteredUserController;
+
+use App\Http\Controllers\Admin\AgentController;
+
 use App\Http\Controllers\Admin\AdministrationController;
-use App\Http\Controllers\Admin\DeliveryChargeController;
-use App\Http\Controllers\Admin\PurchaseReturnController;
-use App\Http\Controllers\Admin\Product\ProductController;
-use App\Http\Controllers\Admin\PurchaseReceiveController;
-use App\Http\Controllers\Admin\Warehouse\WarehouseController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -55,9 +38,8 @@ Route::middleware(['auth', 'verified'])->group(function (){
     Route::resource('roles', RoleController::class);
 
 
-    Route::resource('restaurants',RestaurantController::class);
-    Route::get('restaurant-orders/{user}', [RestaurantController::class, 'restaurantOrders'])->name('restaurant.orders');
-    Route::post('/update-status/{id}',[RestaurantController::class,'statusUpdate'])->name('restaurants.status.update');
+    Route::resource('agents',AgentController::class);
+
     Route::resource('users',UserController::class);
     Route::get('user-orders/{user}', [UserController::class, 'userOrders'])->name('user.orders');
 

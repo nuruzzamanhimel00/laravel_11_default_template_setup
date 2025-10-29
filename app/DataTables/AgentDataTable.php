@@ -10,7 +10,7 @@ use Yajra\DataTables\Html\Column;
 use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Services\DataTable;
 
-class RestaurantDataTable extends DataTable
+class AgentDataTable extends DataTable
 {
 
     use DataTableTrait;
@@ -29,17 +29,15 @@ class RestaurantDataTable extends DataTable
             })
             ->addColumn('action', function ($item) {
                 $buttons = '';
-                if (auth()->user()->can('Show Restaurant')) {
-                    $buttons .= '<li><a class="dropdown-item" href="' . route('restaurants.show', $item->id) . '" title="Edit"><i class="fa fa-eye"></i> ' . __('Show') . '</a></li>';
+                if (auth()->user()->can('Show Agent')) {
+                    $buttons .= '<li><a class="dropdown-item" href="' . route('agents.show', $item->id) . '" title="Edit"><i class="fa fa-eye"></i> ' . __('Show') . '</a></li>';
                 }
-                if (auth()->user()->can('Edit Restaurant')) {
-                    $buttons .= '<li><a class="dropdown-item" href="' . route('restaurants.edit', $item->id) . '" title="Edit"><i class="mdi mdi-square-edit-outline"></i>' . __('Edit') . '</a></li>';
+                if (auth()->user()->can('Edit Agent')) {
+                    $buttons .= '<li><a class="dropdown-item" href="' . route('agents.edit', $item->id) . '" title="Edit"><i class="mdi mdi-square-edit-outline"></i>' . __('Edit') . '</a></li>';
                 }
-                if (auth()->user()->can('My Orders Restaurant')) {
-                    $buttons .= '<li><a class="dropdown-item" href="' . route('restaurant.orders', $item) . '" title="Edit"><i class="fab fa-first-order"></i> ' . __('My Orders') . '</a></li>';
-                }
-                if (auth()->user()->can('Delete Restaurant') ) {
-                    $buttons .= '<form action="' . route('restaurants.destroy', $item->id) . '"  id="delete-form-' . $item->id . '" method="post">
+
+                if (auth()->user()->can('Delete Agent') ) {
+                    $buttons .= '<form action="' . route('agents.destroy', $item->id) . '"  id="delete-form-' . $item->id . '" method="post">
                     <input type="hidden" name="_token" value="' . csrf_token() . '">
                     <input type="hidden" name="_method" value="DELETE">
                     <button class="dropdown-item text-danger delete-list-data" onclick="return makeDeleteRequest(event, ' . $item->id . ')" data-from-name="'. $item->name.'" data-from-id="' . $item->id . '"   type="button" title="Delete"><i class="mdi mdi-trash-can-outline"></i> ' . __('Delete') . '</button></form>
@@ -73,7 +71,7 @@ class RestaurantDataTable extends DataTable
             // })
             ->editColumn('status', function ($item) {
                 $badge = $item->status == STATUS_ACTIVE ? "bg-success" : "bg-danger";
-                $status = $item->status == STATUS_ACTIVE ? "Approve" : "Reject";
+                $status = $item->status == STATUS_ACTIVE ? "Active" : "Inactive";
                 return '<span class="badge ' . $badge . '">' . Str::upper($status) . '</span>';
             })
             ->editColumn('created_at', function ($role) {
@@ -90,7 +88,7 @@ class RestaurantDataTable extends DataTable
     public function query(User $model)
     {
         return $model->newQuery()
-        ->where('type',User::TYPE_RESTAURANT)
+        ->where('type',User::TYPE_AGENT)
         ->latest();
 
     }
@@ -130,16 +128,14 @@ class RestaurantDataTable extends DataTable
             Column::make('email', 'email')->title(__('Email')),
             Column::make('phone', 'phone')->title(__('Phone')),
 
-            Column::make('status', 'status')->title(__('Approve/Reject')),
+            Column::make('status', 'status')->title(__('Active/Inactive')),
             // Column::make('created_at', 'created_at')->title(__('Created At')),
         ];
         if (!request()->has('action')) {
             array_splice($columns, 1, 0, [
                 Column::make('avatar', 'avatar')->title(__('Image')),
             ]);
-            // array_splice($columns, 5, 0, [
-            //     Column::make('status_switch', 'status_switch')->title(__('Approve/Reject')),
-            // ]);
+
         }
         // if (request()->has('action')) {
         //     array_splice($columns, 4, 0, [
@@ -157,7 +153,7 @@ class RestaurantDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Restaurant_' . date('YmdHis');
+        return 'Agents_' . date('YmdHis');
     }
 
     /**

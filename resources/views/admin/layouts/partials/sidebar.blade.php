@@ -41,12 +41,12 @@
 
 
 
-                @can('List Restaurant')
+                @can('List Agent')
 
                 <li>
-                    <a href="{{ route('restaurants.index') }}" class="waves-effect {{ Route::is('restaurants.index') ? 'active' : '' }}">
-                        <i class="far fa-building"></i>
-                        <span>{{__('Restaurants')}}</span>
+                    <a href="{{ route('agents.index') }}" class="waves-effect {{ Route::is('agents.index') ? 'active' : '' }}">
+                        <i class="fas fa-user-tie"></i>
+                        <span>{{__('Agents')}}</span>
                     </a>
                 </li>
                 @endcan

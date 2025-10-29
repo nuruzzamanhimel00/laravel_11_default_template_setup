@@ -26,17 +26,13 @@ class User extends Authenticatable implements MustVerifyEmail
     public const FILE_STORE_PATH    = 'users';
 
 
-    public const TYPE_RESTAURANT       = 'Restaurant';
+    public const TYPE_AGENT       = 'Agent';
     public const TYPE_ADMIN         = 'Admin';
-    public const TYPE_REGULAR_USER         = 'Customer';
-    public const TYPE_DELIVERY_MAN    = 'Delivery Man';
-    public const TYPE_SUPPLIER    = 'Supplier';
 
     public const TYPES              = [
-        self::TYPE_RESTAURANT,
+        self::TYPE_AGENT,
         self::TYPE_ADMIN,
-        self::TYPE_REGULAR_USER,
-        self::TYPE_DELIVERY_MAN,
+
 
     ];
 
@@ -45,7 +41,7 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var array
      */
-    protected $appends = ['avatar_url', 'full_name','is_email_verified','supplier_name','status_badge'];
+    protected $appends = ['avatar_url', 'full_name','is_email_verified','status_badge'];
 
     /**
      * The attributes that are mass assignable.
@@ -79,8 +75,8 @@ class User extends Authenticatable implements MustVerifyEmail
     protected function getStatusBadgeAttribute(): string
     {
         $badge = $this->status == STATUS_ACTIVE ? 'bg-success' : 'bg-danger';
-        if($this->type == self::TYPE_RESTAURANT){
-            $status = $this->status == STATUS_ACTIVE ? 'Approve' : 'Reject';
+        if($this->type == self::TYPE_AGENT){
+            $status = $this->status == STATUS_ACTIVE ? 'Active' : 'Inactive';
             return '<span class="badge '.$badge.'">'.Str::upper($status).'</span>';
         }
         return '<span class="badge '.$badge.'">'.Str::upper($this->status).'</span>';
@@ -98,34 +94,12 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return !is_null($this->email_verified_at) ? true : false;
     }
-    public function getSupplierNameAttribute(): string
-    {
-        return $this->type == self::TYPE_SUPPLIER ? $this->supplier->company : '';
-        // return $this->type == self::TYPE_SUPPLIER ? $this->supplier->company.' ('.trim($this->full_name).')' : '';
-    }
 
-    public function delivery_man(){
-        return $this->hasOne(DeliveryMan::class,'user_id','id');
-    }
 
-    public function supplier(){
-        return $this->hasOne(Supplier::class);
-    }
-    public function restaurant(){
-        return $this->hasOne(Restaurant::class);
-    }
 
     public function user_verify(){
         return $this->hasOne(UserVerify::class);
     }
 
-    public function user_notifications()
-    {
-        return $this->morphMany(Notification::class, 'notifiable');
 
-    }
-
-    public function orders(){
-        return $this->hasMany(Order::class,'order_for_id','id');
-    }
 }

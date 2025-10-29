@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class RestaurantService extends BaseService
+class AgentService extends BaseService
 {
 //    protected $fileUploadService;
 
@@ -23,13 +23,6 @@ class RestaurantService extends BaseService
         if ($id) {
             // Update
             $user           = $this->get($id);
-            if($user->restaurant == null){
-                $user->restaurant()->create($data['restaurants']);
-            }else{
-
-                //restaurant info update
-                $user->restaurant()->update($data['restaurants']);
-            }
 
 
             // Password
@@ -69,8 +62,7 @@ class RestaurantService extends BaseService
             // dd($data);
             // Store user
             $user                       = $this->model::create($data);
-            //restaurant info update
-            $user->restaurant()->create($data['restaurants']);
+
             return $user;
         }
     }

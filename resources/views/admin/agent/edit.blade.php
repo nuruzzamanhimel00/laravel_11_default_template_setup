@@ -4,13 +4,13 @@
         <div class="card">
             <div class="card-body">
 
-                <form action="{{ route('restaurants.update', $user->id) }}" method="post" enctype="multipart/form-data" data-parsley-validate>
+                <form action="{{ route('agents.update', $user->id) }}" method="post" enctype="multipart/form-data" data-parsley-validate>
                     @csrf
                     @method('PUT')
-                    <input type="hidden" name='type' value="{{\App\Models\User::TYPE_RESTAURANT}}">
+                    <input type="hidden" name='type' value="{{\App\Models\User::TYPE_AGENT}}">
                     <div class="row">
                         <div class="form-group col-xl-4 col-lg-6 p-2">
-                            <label>{{ __('Restaurant Name') }} <span class="error">*</span></label>
+                            <label>{{ __('Agent Name') }} <span class="error">*</span></label>
                             <input type="text" name="first_name" class="form-control" placeholder="Enter Name" required
                                    value="{{ old('first_name', $user->first_name) }}">
 
@@ -18,15 +18,7 @@
                             <p class="error">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div class="form-group col-xl-4 col-lg-6 p-2">
-                            <label>{{ __('User Name') }} <span class="error">*</span></label>
-                            <input type="text" name="username" class="form-control" placeholder="Enter User Name" required
-                                value="{{ old('username',$user->username) }}">
 
-                            @error('username')
-                            <p class="error">{{ $message }}</p>
-                            @enderror
-                        </div>
                         <div class="form-group col-xl-4 col-lg-6 p-2">
                             <label>{{ __('Email') }} <span class="error">*</span></label>
                             <input type="email" name="email" class="form-control" required placeholder="Enter email"
@@ -45,22 +37,15 @@
                             <p class="error">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div class="form-group col-xl-4 col-lg-6 p-2">
-                            <label>{{ __('Manager Phone') }}</label>
-                            <input type="tel" value="{{ $user->restaurant->manager_phone ? $user->restaurant->manager_phone : '+880' }}" name="restaurants[manager_phone]"
-                                class="form-control phone">
 
-                            @error('restaurants.manager_phone')
-                            <p class="error">{{ $message }}</p>
-                            @enderror
-                        </div>
+
                         <div class="form-group col-xl-4 col-lg-6 p-2">
-                            <label>{{ __('Password') }} </label>
+                            <label>{{ __(' Password') }} </label>
                             <input type="password" name="password" class="form-control"
-                                   placeholder="Enter password" >
+                                   placeholder="Type password again">
 
                             @error('password')
-                            <p class="error">{{ $message }}</p>
+{{--                            <p class="error">{{ $message }}</p>--}}
                             @enderror
                         </div>
                         <div class="form-group col-xl-4 col-lg-6 p-2">
@@ -93,17 +78,7 @@
                             <p class="error">{{ $message }}</p>
                             @enderror
                         </div>
-                        {{-- {{dd($user->restaurant->address)}} --}}
-                        <div class="form-group col-xl-12 col-lg-12 p-2">
-                            <label>{{ __('Address') }}</label>
 
-
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"  name="restaurants[address]">{{old('address',$user->restaurant->address ?? '' )}}</textarea>
-
-                            @error('address')
-                            <p class="error">{{ $message }}</p>
-                            @enderror
-                        </div>
 
 
                         <div class="form-group col-xl-4 col-lg-6 p-2 {{ auth()->user()->id == $user->id ? 'd-none' : '' }}">
@@ -112,12 +87,12 @@
                                 <div class="custom-control custom-radio custom-control-inline col-md-4">
                                     <input type="radio" id="status_yes" value="{{ \App\Models\User::STATUS_ACTIVE }}"
                                            name="status" class="custom-control-input" {{ old('status',$user->status) == \App\Models\User::STATUS_ACTIVE ? 'checked=""' : '' }}>
-                                    <label class="custom-control-label" for="status_yes">{{ __('Approve') }}</label>
+                                    <label class="custom-control-label" for="status_yes">{{ __('Active') }}</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline col-md-4">
                                     <input type="radio" id="status_no" value="{{ \App\Models\User::STATUS_INACTIVE }}"
                                            name="status" class="custom-control-input" {{ old('status',$user->status) == \App\Models\User::STATUS_INACTIVE ? 'checked=""' : '' }}>
-                                    <label class="custom-control-label" for="status_no">{{ __('Reject ') }}</label>
+                                    <label class="custom-control-label" for="status_no">{{ __('Inactive') }}</label>
                                 </div>
                             </div>
 
@@ -133,7 +108,7 @@
                             <button class="btn btn-success waves-effect waves-lightml-2" type="submit">
                                 <i class="fa fa-save"></i> {{ __('Submit') }}
                             </button>
-                            <a class="btn btn-danger waves-effect" href="{{ route('restaurants.index') }}">
+                            <a class="btn btn-danger waves-effect" href="{{ route('agents.index') }}">
                                 <i class="fa fa-times"></i> {{ __('Cancel') }}
                             </a>
                         </div>

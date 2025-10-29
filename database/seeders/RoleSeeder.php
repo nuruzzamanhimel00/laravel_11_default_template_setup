@@ -32,10 +32,6 @@ class RoleSeeder extends Seeder
             'name'       => 'Admin',
             'guard_name' => 'web',
         ]);
-        Role::updateOrCreate([
-            'name'       => 'Agent',
-            'guard_name' => 'web',
-        ]);
 
         $permissions = Permission::pluck('name')->toArray();
 
