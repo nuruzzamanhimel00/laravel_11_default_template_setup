@@ -19,17 +19,6 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             RoleSeeder::class,
             UserSeeder::class,
-            BrandSeeder::class,
-            CategorySeeder::class,
-            ProductConditionSeeder::class,
-            WarehouseSeeder::class,
-            AttributeSeeder::class,
-            ProductUnitSeeder::class,
-            SupplierSeeder::class,
-            // PromotionTableSeeder::class,
-            RegularUserSeeder::class,
-            RestaurantSeeder::class,
-            DeliveryChargeSeeder::class
         ]);
     }
 }

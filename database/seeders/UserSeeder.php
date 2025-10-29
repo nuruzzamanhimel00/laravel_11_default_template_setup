@@ -39,7 +39,7 @@ class UserSeeder extends Seeder
             'first_name'            => 'Agent ',
             'last_name'            => 'User',
             'email'                 => 'agent@app.com',
-            'phone'                 => '1234567890',
+            'phone'                 => '016225477789',
             'email_verified_at'     => now(),
             'password'              => \Illuminate\Support\Facades\Hash::make('12345678'),
             'status'                => User::STATUS_ACTIVE,
