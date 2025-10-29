@@ -29,8 +29,8 @@ class DashboardController extends Controller
     {
         setPageMeta('Dashboard');
         setCreateRoute(null);
-        $dash_data = $this->dashboardService->getDashboardData($request);
-
-        return view('admin.dashboard', $dash_data);
+        // $dash_data = $this->dashboardService->getDashboardData($request);
+        // dd('dd');
+        return view('admin.dashboard');
     }
 }

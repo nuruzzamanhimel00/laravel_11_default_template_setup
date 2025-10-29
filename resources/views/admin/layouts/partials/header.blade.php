@@ -69,8 +69,8 @@
                 </button>
 
              </div> --}}
-             @include('admin.layouts.partials.low_stock_alert_notifications')
-             @include('admin.layouts.partials.notifications')
+             {{-- @include('admin.layouts.partials.low_stock_alert_notifications')
+             @include('admin.layouts.partials.notifications') --}}
 
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item ic-user-profile d-flex align-items-center text-start gap-2" id="page-header-user-dropdown"

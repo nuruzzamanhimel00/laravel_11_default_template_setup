@@ -67,35 +67,7 @@
         @endforeach
     @endif
 
-$(document).ready(function () {
-    $(document).on('change', '.checkbox_switch', function () {
-        let id = $(this).data('id');
-        let status = $(this).prop('checked') ? "{{STATUS_ACTIVE}} ": "{{STATUS_INACTIVE}}" // Get checkbox state (1 for checked, 0 for unchecked)
 
-        // Uncomment the AJAX request to update the status in the backend
-
-        $.ajax({
-            url: "/update-status/" + id,
-            method: "POST",
-            data: {
-                _token: "{{ csrf_token() }}",
-                status: status
-            },
-            success: function (response) {
-                if(response){
-
-                    toastr.success("Status Updated Successfully.");
-                }
-                // console.log(response);
-            },
-            error: function (xhr) {
-                toastr.error(xhr.responseText);
-                console.log(xhr.responseText);
-            }
-        });
-
-    });
-});
 
 
 </script>
